@@ -146,6 +146,8 @@ export default {
     },
   },
   mounted() {
+    console.log("store")
+    console.log(this.$store)
     const shouldUserSeeOnboarder = this.$store.state.app.isFirstRun
     if (shouldUserSeeOnboarder) {
       return

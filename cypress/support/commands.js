@@ -23,33 +23,3 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-const username = 'toktest'
-const password = 'junkjunk'
-Cypress.Commands.add('login', (username, password) => {
-    const args = {
-        username,
-        password
-    }
-    cy.session(
-        // Username & password can be used as the cache key too
-        args,
-        () => {
-            cy.origin('my-auth.com', {
-                args
-            }, ({
-                username,
-                password
-            }) => {
-                cy.visit('/login')
-                cy.contains('Username').find('input').type(username)
-                cy.contains('Password').find('input').type(password)
-                cy.get('button').contains('Login').click()
-            })
-            cy.url().should('contain', '/home')
-        }, {
-            validate() {
-                cy.request('/api/user').its('status').should('eq', 200)
-            },
-        }
-    )
-})
