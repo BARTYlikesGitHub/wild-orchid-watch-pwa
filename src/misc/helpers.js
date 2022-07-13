@@ -351,6 +351,17 @@ export function isNotInteger(str) {
   return !/^-?\d+$/.test(str)
 }
 
+export function isNotFloat(str) {
+  if (
+    typeof value === 'number' &&
+    !Number.isNaN(str) &&
+    !Number.isInteger(str)
+  ) {
+    return true
+  }
+  return false
+}
+
 export function rectangleAlongPathAreaValueToTitle(v) {
   if (isNotPositiveInteger(v)) {
     const ltPrefix = 'less than'
